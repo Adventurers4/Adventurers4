@@ -19,21 +19,7 @@ class AllNotes extends React.Component {
                 this.setState({ notes: res.data.data});
             })
     }
-      //arr[i].text
-/*[
-RowDataPacket {
-id: 2,
-text: 'note1',
-date: 2020-06-29T21:00:00.000Z,
-idu: 1
-},
-RowDataPacket {
-id: 3,
-text: 'hey',
-date: 2020-06-30T21:00:00.000Z,
-idu: 1
-}
-] */
+      
 render() {
     return (
         <div >

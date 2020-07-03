@@ -7,15 +7,17 @@ var app = express();
 
 var mysql = require('mysql');
 
+//connect to the db
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
     database: 'MyNotes',
-    port: 3001
+    // port: 3001
 
 });
 
+//create the schema
 connection.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
@@ -39,14 +41,6 @@ connection.connect(function (err) {
 
 });
 
-/* session.id = results[0].id
-app.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true,
-    id : 0
-}));
- */
 
 var obj={id:0}
 
@@ -55,38 +49,12 @@ app.use(session({
     secret: 'secret',
     resave: true,
     saveUninitialized: true
-    // id: 0
+    
 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// app.get('/', function (request, response) {
-//   response.sendFile(path.join(__dirname + '/login.html'));
-// });
-// var hash;
-// app.post('/login', function (request, response) {
-//     console.log("inside post login server")
-//     var email = request.body.email;
-//     var password = request.body.password;
-//     connection.query('SELECT * FROM USERS WHERE email = ? AND password = ?', [email], function (error, results, fields) {
 
-//             // if (results.length > 0) {
-//                 if (bcrypt.compareSync(password, results[0].password)) {
-//                 request.session.loggedin = true;
-//                 request.session.name = results[0].name;
-//                 obj.id = results[0].id
-                
-//                 response.send('correct Username and/or Password!'); 
-//             } else {
-//                 response.send('Incorrect Username and/or Password!');
-//             }
-//             response.end();
-//         });
-//     // else {
-//     //     response.send('Please enter Username and Password!');
-//     //     response.end();
-//     // }
-// });
 // login
 app.post('/login', (req, res) => {
     const email = req.body.email;
@@ -150,27 +118,10 @@ app.post('/register', function (req, res) {
             })
         }
     });
-    // });
+   
 });
 
-// app.post('/addNotes', function (req, res) {
-//     var text = req.body.text
-//     var date = req.body.date
-//     var sql = "INSERT INTO NOTES (text, date) VALUES ?"
-//     var values = [text, date]
-//     connection.query(sql, [values], function (err, result) {
-//         if (err) throw err;
-//         console.log("1 record inserted");
-//     });
-// });
-// app.get('/Note', function (request, response) {
-//     if (request.session.loggedin) {
-//         response.send('Welcome back, ' + request.session.name + '!');
-//     } else {
-//         response.send('Please login to view this page!');
-//     }
-//     response.end();
-// });
+//add notes
 app.post('/Note', function (req, res) {
     var note = {
         text: req.body.text,
@@ -189,18 +140,16 @@ app.post('/Note', function (req, res) {
                 data: results,
                 message: 'add note sucessfully'
             })
-            //  res.send('Welcome back, ' + request.session.name + '!');
-
         }
     });
 });
+
+//delete notes
 app.post('/delNotes', function (req, res) {
     var id = req.body.id
   
     // DELETE statment
     var sql = 'DELETE  FROM NOTES WHERE id = ?';
-// var sql = "DELETE FROM customers WHERE address = 'Mountain 21'";
-    // delete a row with id 1
     connection.query(sql, id, (error, results, fields) => {
         if (error)
             return console.error(error.message);
@@ -211,37 +160,26 @@ app.post('/delNotes', function (req, res) {
     });
 });
 
+//update note
 app.post('/upNotes', function (req, res) {
-
-    
-       var text= req.body.text
-        var date = req.body.date
-       var id=req.body.id
+    var text= req.body.text
+    var date = req.body.date
+    var id=req.body.id
     
     var sql = "UPDATE NOTES set text =? , date =?  WHERE id = ?";
-var note=[text,date,id]
-    // var sql = `UPDATE NOTES
-    //        SET text = ?
-    //        WHERE id = ?`;
-    // var sql = `UPDATE NOTES SET text = ? WHERE id = ?`;
-    
-
-    // execute the UPDATE statement
+	var note=[text,date,id]
     connection.query(sql,note, (error, results, fields) => {
         if (error) {
             return console.error(error.message);
         }
-        // console.log('Rows affected:', results.affectedRows);
         res.send('updated');
-
     });
 });
 
+//get all the notes
  app.get('/selectNotes', function (req, res) {
      var idu=obj.id
      var sql = 'SELECT * FROM NOTES where idu=?'
-    //  var sql = 'SELECT id, text, Date_FORMAT(date, "%d%m%Y") FROM NOTES where idu=?'
-
      connection.query(sql,idu, function (error, results, fields) {
          console.log(results)
          if (error) {
@@ -255,20 +193,20 @@ var note=[text,date,id]
                  data: results,
                  message: 'select all notes sucessfully'
              })
-            // res.send(data) 
          }
      });   
  });
 
 
-
+//use it for the redirect in the front end 
 app.post('/App',function(req,res){
-    // var name = req.body.name
 console.log("posted from App rout")   
 //  res.end(obj.id)
     console.log(obj.id)
 })
 
+
+//logout
 app.post('/logout', (request, response) => {
 obj.id=0
     console.log('Destroying session');
@@ -278,5 +216,5 @@ obj.id=0
 });
 
 app.listen(5000, function () {
-    console.log('listening on port 3000!');
+    console.log('listening on port 5000!');
 });

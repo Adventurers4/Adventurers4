@@ -32,30 +32,6 @@ class SingleNote extends React.Component {
 
         this.setState({ id: 0})
     }
-       
-    // handleRemove = (e) => {
-    //     const id = this.state.id;
-    //     const url = 'http://localhost:5000/delNotes';
-    //     // const id = document.querySelectorAll("li").props['data-id'];
-    //     e.preventDefault();
-    //     axios.post(url , id)
-    //         .then(res => {
-    //             console.log(res.data);
-    //         })
-    //         .catch((err) => {
-    //             console.log(err);
-    //         })
-    // }
-    // handleNoteDelete = (note) => {
-    //     var noteId = note.id;
-    //     var newNotes = this.state.notes.filter(function (note) {
-    //         return note.id !== noteId;
-    //     });
-    //     this.setState({ notes: newNotes });
-    // };
-    // onUpdate(){
-
-    // }
     render() {
         return (
             <div >

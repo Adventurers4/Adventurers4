@@ -69,25 +69,6 @@ class Note extends React.Component {
             return <Redirect to='/App' exact component={App} />;
         }
         return (
-            // <div>
-            //     <button onClick={this.logout}>logout</button>
-            //     <form onSubmit={this.onSubmit}>
-
-            //     <div>
-            //         <textarea className="text"
-            //             placeholder="enter"
-            //             rows={6} 
-            //             value={this.state.text} onChange={this.onChangeText}
-            //                 // onChange={this.onChangeDate}
-            //             />
-            //             <button onClick={this.onChangeDate}>Add</button>
-                        
-                 
-            //     </div>
-
-            //  </form>
-            //    <div><AllNotes/></div>
-            // </div>
             <div>
                 <button onClick={this.logout}>logout</button>
                 <form onSubmit={this.onSubmit}>

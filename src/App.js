@@ -14,33 +14,6 @@ import {
 
 function App() {
   return (
-    // <div className="App">
-    //   {/* <Login/>
-    //   <Route path="/Login" component={Login} /> */}
-    //   <HashRouter>
-    //     <div>
-    //       <h1>Notes App</h1>
-    //       <nav>
-    //       <ul>
-    //         <li><NavLink to="/">Home</NavLink></li>
-    //         <li><NavLink to="/login">Login</NavLink></li>
-    //         <li><NavLink to="/Signup">Signup</NavLink></li>
-    //         {/* <li><NavLink to="/Note">Note</NavLink></li> */}
-    //       </ul>
-    //       </nav>
-    //       <div className="content">
-    //         <Route exact path="/" component={Home} />
-    //         <Route path="/login" component={Login} />
-    //         <Route path="/Signup" component={Signup} />
-    //         <Route path="/Note" component={Note} />
-    //       </div>
-    //     </div>
-    //   </HashRouter>
-
-
-
-    // </div>
-
     <div className="App" >
       {/* <Login/>
       <Route path="/Login" component={Login} /> */}
